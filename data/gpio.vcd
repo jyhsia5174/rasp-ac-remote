@@ -1,0 +1,38 @@
+$date 2021-07-26 19:59:47 $end
+$version piscope V1 $end
+$timescale 1 us $end
+$scope module top $end
+$var wire 1 A 0 $end
+$var wire 1 B 1 $end
+$var wire 1 C 2 $end
+$var wire 1 D 3 $end
+$var wire 1 E 4 $end
+$var wire 1 F 5 $end
+$var wire 1 G 6 $end
+$var wire 1 H 7 $end
+$var wire 1 I 8 $end
+$var wire 1 J 9 $end
+$var wire 1 K 10 $end
+$var wire 1 L 11 $end
+$var wire 1 M 12 $end
+$var wire 1 N 13 $end
+$var wire 1 O 14 $end
+$var wire 1 P 15 $end
+$var wire 1 Q 16 $end
+$var wire 1 R 17 $end
+$var wire 1 S 18 $end
+$var wire 1 T 19 $end
+$var wire 1 U 20 $end
+$var wire 1 V 21 $end
+$var wire 1 W 22 $end
+$var wire 1 X 23 $end
+$var wire 1 Y 24 $end
+$var wire 1 Z 25 $end
+$var wire 1 a 26 $end
+$var wire 1 b 27 $end
+$var wire 1 c 28 $end
+$var wire 1 d 29 $end
+$var wire 1 e 30 $end
+$var wire 1 f 31 $end
+$upscope $end
+$enddefinitions $end
