@@ -1,16 +1,20 @@
-import pigpio
 from time import sleep
 
 def vcd_parse(name):
-    timestamp = []
     lines = []
     with open(name, "r") as f:
         counter = 0
+        stamp = ""
         for line in f:
             if line[0] == '#':
+                stamp = line.strip()
                 counter += 1
             if counter >= 2:
-                lines.append(line.strip())
+                if line[0] != '#':
+                    now = line.strip()
+                    if now[-1] == 'C':
+                        lines.append(stamp)
+                        lines.append(now)
 
     interval = []
     for i in range(2, len(lines), 2):
@@ -18,6 +22,8 @@ def vcd_parse(name):
         b = int( lines[i][1:] )
         interval.append(b - a)
 
+    print("len: "+ str( len(interval) ))
+    print(interval)
     return interval
 
 def decode(name):
@@ -38,33 +44,3 @@ def decode(name):
             a = "".join(map(str, data[i:i+8]))
             f.write(a + '\n')
 
-def pulse(on_us, off_us, pi):
-    pi.write(3, 1)
-    sleep(on_us*1e-6)
-    pi.write(3, 0)
-    sleep(off_us*1e-6)
-
-def transmit(name):
-    pi = pigpio.pi()
-
-    A = vcd_parse(name)
-    thred = 700
-    data = []
-    for i in range(len(A)):
-        if( (i & 1) != 1 ):
-            if( A[i] > 700 ):
-                data.append(1)
-            else:
-                data.append(0)
-
-    pi.hardware_clock(4, 38000)
-    pulse(3370, 1640, pi)
-    with open("t.bit", 'w') as f:
-        for d in data[1:]:
-            f.write(str(d)+"\n")
-    #for d in data[1:]:
-    #    if d == 1:
-    #        pulse(440, 1280, pi)
-    #    else:
-    #        pulse(440, 490, pi)
-    pi.hardware_clock(4, 0)
