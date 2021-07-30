@@ -1,4 +1,5 @@
 from time import sleep
+import os
 
 def vcd_parse(name):
     lines = []
@@ -23,7 +24,7 @@ def vcd_parse(name):
         interval.append(b - a)
 
     print("len: "+ str( len(interval) ))
-    print(interval)
+    #print(interval)
     return interval
 
 def decode(name):
@@ -39,8 +40,27 @@ def decode(name):
 
     with open(name[:-4]+".dat", 'w') as f:
         for i in range(1, len(data), 8):
-            if i % 16 == 9:
-                f.write('-'*8 + '\n')
+            #if i % 16 == 9:
+            #    f.write('-'*8 + '\n')
             a = "".join(map(str, data[i:i+8]))
             f.write(a + '\n')
 
+def transmit(name):
+    A = vcd_parse(name)
+    thred = 700
+    data = []
+    for i in range(len(A)):
+        if( (i & 1) != 1 ):
+            if( A[i] > 700 ):
+                data.append(1)
+            else:
+                data.append(0)
+
+    data_file = name[:-4] + ".dat"
+    with open(data_file, 'w') as f:
+        for i in range(1, len(data), 8):
+            a = "".join(map(str, data[i:i+8]))
+            f.write(a + '\n')
+
+    #os.system("make")
+    os.system("./38khz {}".format(data_file))
