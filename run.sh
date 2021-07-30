@@ -1,7 +1,8 @@
 #!/bin/bash
 
-for i in {1..5}
+for i in {1..20}
 do
-  ./38khz
-  sleep 0.5s
+  echo ${i}
+  ./38khz $1
+  sleep 1s
 done

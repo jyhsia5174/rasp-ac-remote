@@ -61,9 +61,17 @@ int main(int argc, char **argv){
 
     if( fp != NULL ){
       int bit[344];
-      for(int i = 0; i < 344; i++)
-        fscanf(fp, "%d", bit+i);
-        //bit[i] = 0;
+      for(int i = 0; i < 344; i++){
+        char c;
+        fscanf(fp, "%c ", &c);
+        bit[i] = c - '0';
+      }
+
+      for(int i = 0; i < 344; i++){
+        if( i % 8 == 0 )
+          printf("\n");
+        printf("%d ", bit[i]);
+      }
 
       pulse(pi, P3370, P1640);
       for(int i = 0; i < 344; i++){
